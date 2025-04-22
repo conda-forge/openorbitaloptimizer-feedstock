@@ -30,6 +30,9 @@ outputs:
         - ninja
       host:
         - armadillo
+        - libxc-c                                                                         # testing
+        - nlohmann_json                                                                   # testing
+        - integratorxx                                                                    # testing
     test:
       files:
         - tests/CMakeLists.txt
