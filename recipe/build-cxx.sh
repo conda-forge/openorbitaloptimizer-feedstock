@@ -7,18 +7,22 @@ if [[ "$target_platform" == linux-* ]]; then
     ARCH_ARGS=""
 
 fi
+if [[ "$target_platform" == "linux-ppc64le" ]]; then
+    CFLAGS="$(echo $CFLAGS | sed 's/-fno-plt //g')"
+    CXXFLAGS="$(echo $CXXFLAGS | sed 's/-fno-plt //g')"
+fi
 
 ${BUILD_PREFIX}/bin/cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
   -S ${SRC_DIR} \
   -B build \
   -G Ninja \
   -D CMAKE_INSTALL_PREFIX=${PREFIX} \
-  -D CMAKE_BUILD_TYPE=Release \
+  -D CMAKE_BUILD_TYPE=Debug \
   -D CMAKE_CXX_COMPILER=${CXX} \
-  -D CMAKE_CXX_FLAGS="${CXXFLAGS}" \
+  -D CMAKE_CXX_FLAGS="${CXXFLAGS} -O0" \
   -D CMAKE_INSTALL_LIBDIR=lib \
   -D OpenOrbitalOptimizer_INSTALL_CMAKEDIR="share/cmake/OpenOrbitalOptimizer" \
-  -D OpenOrbitalOptimizer_BUILD_TESTING=OFF \
+  -D OpenOrbitalOptimizer_BUILD_TESTING=ON \
   -D CMAKE_PREFIX_PATH="${PREFIX}"
 
 cmake --build build --target install -j${CPU_COUNT}

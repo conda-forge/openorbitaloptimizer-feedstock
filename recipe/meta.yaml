@@ -30,6 +30,9 @@ outputs:
         - ninja
       host:
         - armadillo
+        - libxc-c                                                                         # testing
+        - nlohmann_json                                                                   # testing
+        - integratorxx                                                                    # testing
     test:
       files:
         - tests/CMakeLists.txt
@@ -45,9 +48,9 @@ outputs:
         - libxc-c
         - nlohmann_json
         - integratorxx
-        - liblapack * *mkl                                                     # [linux]
-        - libblas * *netlib                                                    # [win]    # armadillo+win missing blas.lib w/o this
-        - liblapack * *netlib                                                  # [win]
+        - liblapack * *mkl                                                     # [linux and x86_64]
+        - libblas * *netlib                                                    # [win or not x86_64]    # armadillo+win missing blas.lib w/o this
+        - liblapack * *netlib                                                  # [win or not x86_64]
       commands:
         # Verify library (skip, as header-only)
         # Verify accessories
@@ -63,6 +66,7 @@ outputs:
         - cd tests
         - set "LDFLAGS=%LDFLAGS:/link =%"                                      # [win]
         - echo "%LDFLAGS%"                                                     # [win]
+        - export CXXFLAGS="$(echo $CXXFLAGS | sed 's/-fno-plt //g')"           # [ppc64le]
         - cmake -S. -Bbuild -GNinja -DCMAKE_PREFIX_PATH="${PREFIX}"            # [unix]
         - cmake -S. -Bbuild -GNinja -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_BUILD_TYPE=Release"  # [win]
         - cmake --build build
