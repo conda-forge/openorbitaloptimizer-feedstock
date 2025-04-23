@@ -17,9 +17,9 @@ ${BUILD_PREFIX}/bin/cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
   -B build \
   -G Ninja \
   -D CMAKE_INSTALL_PREFIX=${PREFIX} \
-  -D CMAKE_BUILD_TYPE=Release \
+  -D CMAKE_BUILD_TYPE=Debug \
   -D CMAKE_CXX_COMPILER=${CXX} \
-  -D CMAKE_CXX_FLAGS="${CXXFLAGS}" \
+  -D CMAKE_CXX_FLAGS="${CXXFLAGS} -O0" \
   -D CMAKE_INSTALL_LIBDIR=lib \
   -D OpenOrbitalOptimizer_INSTALL_CMAKEDIR="share/cmake/OpenOrbitalOptimizer" \
   -D OpenOrbitalOptimizer_BUILD_TESTING=ON \
