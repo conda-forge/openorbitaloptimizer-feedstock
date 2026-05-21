@@ -1,5 +1,5 @@
 {% set name = "OpenOrbitalOptimizer" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
   name: {{ name|lower }}-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/SusiLehtola/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0ef79d0881403c6f0480e269d319e482f1ce32ddc79e49b717468b14ce4d07c0
+  sha256: 8e6a2b57f408244a348d14d64a3f7efdda30a5a0bcaa219726ef8f1a0ac7cf69
 
 build:
   number: 0
