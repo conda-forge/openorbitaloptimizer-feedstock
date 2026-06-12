@@ -45,9 +45,9 @@ outputs:
         - libxc-c
         - nlohmann_json
         - integratorxx
-        - liblapack * *mkl                                                     # [linux]
-        - libblas * *netlib                                                    # [win]    # armadillo+win missing blas.lib w/o this
-        - liblapack * *netlib                                                  # [win]
+        - liblapack * *mkl                                                     # [linux and x86_64]
+        - libblas * *netlib                                                    # [win or not x86_64]    # armadillo+win missing blas.lib w/o this
+        - liblapack * *netlib                                                  # [win or not x86_64]
       commands:
         # Verify library (skip, as header-only)
         # Verify accessories
